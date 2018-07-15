@@ -1,0 +1,378 @@
+ list all the shell script contents of the directory 
+File: arrrays.sh
+cmdlinevar.sh
+comments.sh
+condif.sh
+display.sh
+dynamic.sh
+env.sh
+errors.sh
+eval.sh
+expression.sh
+forsample.sh
+four.sh
+ifexpression.sh
+ifthenelse.sh
+interactive.sh
+null.sh
+read.sh
+server.sh
+subs.sh
+testfile.sh
+test.sh
+three.sh
+using.sh
+vars.sh - contents #!/usr/bin/bash
+
+SERVERLIST=("webserver1" "webserver2" "webserver3")
+COUNT= 0
+for INDEX in ${SERVERLISt[@]}; do
+    echo " Processing server: ${SERVERLIST[COUNT]}"
+    COUNT="`expr $COUNT + 1`"
+done 
+#!/usr/bin/bash
+# demo of command line values passed in from our shell script 
+
+
+USERNAME=$1
+PASSWORD=$2
+
+echo " The following Username is $USERNAME and Password is $PASSWORD "
+#!/usr/bin/bash
+
+#Using comments in the script to  show
+
+clear # clears the screeen
+
+#MYUSERNAME="SHASHI" # the username for this app is 
+
+MYUSERNAME="DON" # new user
+echo " We are using default user called: $MYUSERNAME" # display the username to console
+
+DATETIMESTAMP=`date`
+
+echo " tis is when the script was run ; $DATETIMESTAMP" #this is the timestamp of run
+#!/usr/bin/bash
+
+# Simple if statement for guessing the number
+
+echo "Guess the Secret Number"
+
+echo "-----------------------"
+
+echo ""
+
+echo "Enter a Number b/w 1 and 5; "
+read GUESS
+
+if [ $GUESS -eq 3 ]
+   then 
+     echo "You Guessed the correct Number!"
+fi
+#!/usr/bin/bash
+
+#displaying     the environment variables on to the console 
+
+echo ""
+echo " You are the User: $USERNAME"
+echo ""
+echo " Your Home directory is: $HOME"
+echo ""
+echo "Your history is : $HISTCONTROL"
+echo ""
+echo " your present terminal is : $TERM"
+echo " ----------------------------------"
+#!/usr/bin/bash
+
+# Writing a script to dynamically set variables using alias 
+
+
+shopt -s expand_aliases
+
+alias TODAY="date"
+alias UFILE="find /home -user user"
+
+
+TODAYSDATE=`date`
+USERFILES=`find /home -user user`
+
+echo " Todays date is : $TODAYSDATE "
+echo " Files owner : $USERFILES "
+
+A=`TODAY`
+B=`UFILE`
+
+echo " With alias, TODAY is:$A"
+echo " With alias, UFILE is:$B" 
+
+#!/usr/bin/bash
+
+clear 
+
+echo " this script will show the environment information"
+echo "==================================================="
+echo ""
+echo " Hello User.name : $USER"
+echo ""
+echo " Your Home directory is : $HOME"
+echo ""
+echo " Your History file will Ignore : $HISTCONTROL"
+echo ""
+echo " Your Terminal Session Type is : $TERM "
+echo ""
+#!/usr/bin/bash
+
+# this is to show exit status type s
+
+set -e
+
+expr 1 + 5
+echo $?
+rm doodles.sh
+echo $?
+
+expr 10 + 10
+echo $?
+#!/usr/bin/bash 
+
+#Evaluating and displaying certain arithmetic operations on  to the console 
+
+# adding two numbers
+
+echo "`expr 2 + 2`"
+
+echo "--------------"
+
+#adding two numbers grouped 
+
+echo "`expr \( 2 + 2 \) \* 4`"
+
+echo "-----------------------"
+
+#adding two numbers and multiplyin to third 
+
+echo "`expr 2 + 2 \* 6`"
+
+echo "-----------------------" 
+#!/usr/bin/bash
+
+# expression evaluation
+
+expr 2 + 2 
+
+expr 2 + 2 \* 4
+
+expr \( 2 + 2 \) \* 4
+#!/usr/bin/bash
+# this is a demo of the for loop
+
+echo " list all the shell script contents of the directory "
+
+SHELLSCRIPTS=`ls *.sh`
+
+for SCRIPT in "$SHELLSCRIPTS"; do
+   DISPLAY="`cat $SCRIPT`"
+   echo "File: $SCRIPT - contents $DISPLAY"
+done
+
+#!/usr/bin/bash
+
+MYUSERNAME="Shashi"
+
+echo " User.name:$MYUSERNAME"
+
+
+STARTOFSCRIPT=`date`
+
+echo  " This script was started at :$SATRTOFSCRIPT"
+
+MYPASSWORD="PASSWD"
+
+echo " Your Current password is :$MYPASSWD"
+
+
+ENDOFSCRIPT=`date`
+
+echo "This script was ended on :$ENDOFSCRIPT"
+#!/usr/bin/bash
+# test multiple expressions in a single if statement
+
+
+FILENAME=$1
+
+echo "Testing for a file $FILENAME and readability"
+
+if [ -f $FILENAME ] && [ -r $FILENAME ]
+   then 
+     echo "File $FILENAME is exist and readable"
+fi
+#!/usr/bin/bash
+# Simple example on if then else 
+
+
+clear
+
+echo " Enter the number b/w 1 and 3: "
+read VALUE
+
+if [ "$VALUE" -eq "1" ] 2>/dev/null; then
+   echo "You entered the 1st number "
+elif [ "$VALUE" -eq "2" ] 2>/dev/null; then 
+   echo "You succesfully entered the 2nd number "
+elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
+   echo " You enetered the 3 rd number "
+else 
+   echo " You did not follow the directions "
+fi
+
+#!/usr/bin/bash 
+
+# asking the user for input and then calaculating the given value
+
+
+clear #clearing the screen
+
+echo " Please enter your firstname: "
+read FIRSTNAME  # reading the users firstname 
+
+echo " Please enter your lastname: "
+read LASTNAME   # reading the user's lastname 
+
+echo " Your full name is : $FIRSTNAME $LASTNAME " # displaying the fullname of the user to console 
+
+echo " Please enter your age: "
+read USERAGE # reading the user's age 
+
+echo " Your age after 10 Years will be `expr $USERAGE + 10`" # Calculating the user's age 
+
+#!/usr/bin/bash
+
+#redirect to the /dev/null example
+
+echo " this is displaying to the console"
+
+echo "this is going into the black hole" >> /dev/null
+#!/usr/bin/bash
+
+# interactive script for user input 
+
+echo "Enter your firstname:"
+read "FIRSTNAME"
+
+echo "enter your Lastname: "
+read "LASTNAME"
+
+echo ""
+echo " Your full name is : $FIRSTNAME $LASTNAME"
+echo ""
+echo " Enter YOUR AGE: "
+read "USERAGE"
+
+echo " IN 10 years , you will be `expr $USERAGE + 10` years old."
+#!/usr/bin/bash
+
+clear # clearing the screen
+
+
+SERVERLIST=("WebServer1" "WebServer2" "WebServer3" "WebServer4")   # Assigning an array of four webservers 
+COUNT=0                                                           # Declaring a variable count 
+
+
+for INDEX in ${SERVERLIST[@]}; do                                   # Initiating the for loop to iterate count 
+     echo "Processing Server: ${SERVERLIST[COUNT]}"
+     COUNT="`expr $COUNT + 1`" 
+done
+
+echo "-----------------------------" 
+
+echo " This is  a server processing request from the available server " # Displaying the above output the screeen 
+
+
+echo "-----------------------------"
+#!/usr/bin/bash
+
+# This script is intended to run a simple command substitution 
+
+shopt -s expand_aliases
+
+alias TODAY="date"
+alias UFILES="find /home -user user"
+
+TODAYSDATE=`date`
+USERFILES=`find /home -user user`
+
+echo "todays date: $TODAYSDATE"
+echo " ALL files owned by user: $USERFILES"
+
+A=`TODAY`
+B=`UFILES`
+
+echo "With the ALIAS, TODAY is: $A"
+echo "With the ALIAS, UFILES is: $B"
+#!/usr/bin/bash
+
+# tests for exisistence of indicated file name 
+
+FILENAME=$1
+echo " Testing for the exsistence of a file called : $FILENAME"
+
+if [ ! -a $FILENAME ]
+   then 
+     echo "File $FILENAME Does not exists"
+fi
+#!/bin/bash
+clear 
+echo "hello world"
+#!/usr/bin/bash
+
+# Writing a script on exit status
+set -e
+
+echo "================================"
+
+echo "`expr 2 + 2`"
+echo $?
+
+rm -rf doodle.txt
+echo $?
+
+echo "`expr 10 + 10`"
+echo $?
+
+echo "================================="
+#!/usr/bin/bash
+
+#this script shows how to use comments
+
+clear # this clears the screen
+
+# MYUSERNAME="SHASHI" # this is my old user 
+
+MYUSERNAME="DON" # reassigning the old user with a new one 
+
+PASSWORD="ds" #this is a password 
+
+TIMESTAMP=`date` #this is date when the user has been created 
+
+echo " Display the User: $MYUSERNAME " # this displays the assigned user
+
+echo ""
+
+echo " Display the Password: $PASSWORD " # this displays the current password 
+
+echo ""
+
+echo " Display the Login Time: $TIMESTAMP " #this user was currently logged in at this specific  time  
+#!/usr/bin/bash
+
+MYUSERNAME="SHASHI"
+MYPASSWORD="PASWD"
+STARTOFSCRIPT=`date`
+
+echo "My login name for this application is : $MYUSERNAME"
+echo "Password is : $MYPASSWORD"
+echo "I started this script at : $SATROFSCRIPT"
+
+ENDOFSCRIPT=`date`
+
+echo "I've ended this script at: $ENDSCRIPT"
